@@ -1,6 +1,9 @@
 # Github workflows
 # Made by SmallPP420
 # the size of this program is gonna be huge xd
+
+ls /home/runner/work/PS4-Firmware-Downloader/
+
 dotnet publish "/home/runner/work/PS4-Firmware-Downloader/PS4 Firmware Downloader.csproj" /p:DefineConstants=WINDOWS --output "build/" --arch x64 --os win -c release --self-contained true # win build
 
 dotnet publish "/home/runner/work/PS4-Firmware-Downloader/PS4 Firmware Downloader.csproj" /p:DefineConstants=WINDOWS --output "build-debug/" --arch x64 --os win -c debug --self-contained true # win build
