@@ -32,5 +32,5 @@ jobs:
             /home/runner/work/PS4-Firmware-Downloader/PS4-Firmware-Downloader/build/DEBUG-PS4 Firmware Downloader.exe
             /home/runner/work/PS4-Firmware-Downloader/PS4-Firmware-Downloader/build/Linux-PS4 Firmware Downloader
             /home/runner/work/PS4-Firmware-Downloader/PS4-Firmware-Downloader/build/Linux-DEBUG-PS4 Firmware Downloader
-        name: Meme Downloader 2022 Auto-Build
+        name: PS4 Firmware Downloader Auto-Build
         tag_name: "${{ steps.date.outputs.today }}--Win"
