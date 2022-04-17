@@ -4,6 +4,12 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>net6.0</TargetFramework>
     <RootNamespace>PS4_Firmware_Downloader</RootNamespace>
+    <!--Fixes certain errors while compiling-->
+	<PublishTrimmed>false</PublishTrimmed>
+	<!--Embed the .pdb file within the exe or dll, delete to disable, this is just to help debugging-->
+	<DebugType>embedded</DebugType>
+	<PublishSingleFile>true</PublishSingleFile>
+	<EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
