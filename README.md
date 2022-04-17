@@ -6,4 +6,6 @@ Download PS4 Firmwares
 Scraping links xd
 
 # Dependencies
-Spectre.Console\nHTMLAgilityPack
+Spectre.Console
+
+HTMLAgilityPack
