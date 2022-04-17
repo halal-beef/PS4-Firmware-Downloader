@@ -11,9 +11,9 @@ dotnet publish "/home/runner/work/PS4-Firmware-Downloader/PS4-Firmware-Downloade
 dotnet publish "/home/runner/work/PS4-Firmware-Downloader/PS4-Firmware-Downloader/PS4 Firmware Downloader.csproj" /p:DefineConstants=LINUX --output "build-debug/" --arch x64 --os linux -c debug --self-contained true # linux build
 
 # Move debug build
-mv "/home/runner/work/PS4-Firmware-Downloader/PS4-Firmware-Downloader/build-debug/PS4 Firmware Downloader.exe" "/home/runner/work/PS4-Firmware-Downloader/build/DEBUG-PS4 Firmware Downloader.exe"
+mv "/home/runner/work/PS4-Firmware-Downloader/PS4-Firmware-Downloader/build-debug/PS4 Firmware Downloader.exe" "/home/runner/work/PS4-Firmware-Downloader/PS4-Firmware-Downloader/build/DEBUG-PS4 Firmware Downloader.exe"
 
 # Move debug build
-mv "/home/runner/work/PS4-Firmware-Downloader/PS4-Firmware-Downloader/build-debug/PS4 Firmware Downloader" "/home/runner/work/PS4-Firmware-Downloader/build/Linux-DEBUG-PS4 Firmware Downloader"
+mv "/home/runner/work/PS4-Firmware-Downloader/PS4-Firmware-Downloader/build-debug/PS4 Firmware Downloader" "/home/runner/work/PS4-Firmware-Downloader/PS4-Firmware-Downloader/build/Linux-DEBUG-PS4 Firmware Downloader"
 
-mv "/home/runner/work/PS4-Firmware-Downloader/PS4-Firmware-Downloader/build/PS4 Firmware Downloader" "/home/runner/work/PS4-Firmware-Downloader/build/Linux-PS4 Firmware Downloader"
+mv "/home/runner/work/PS4-Firmware-Downloader/PS4-Firmware-Downloader/build/PS4 Firmware Downloader" "/home/runner/work/PS4-Firmware-Downloader/PS4-Firmware-Downloader/build/Linux-PS4 Firmware Downloader"
