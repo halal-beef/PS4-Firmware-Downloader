@@ -81,8 +81,8 @@ async Task Download(HttpClient client, ProgressTask task, string url)
             task.MaxValue(response.Content.Headers.ContentLength ?? 0);
             task.StartTask();
 
-            var filename = @"Downloaded Firmware\" + url.Substring(url.LastIndexOf('/') + 1);
-            AnsiConsole.MarkupLine($"Starting download of [u]{filename.Replace(@"Downloaded Firmware\","")}[/] ({task.MaxValue} bytes)");
+            var filename = @"Downloaded Firmware/" + url.Substring(url.LastIndexOf('/') + 1);
+            AnsiConsole.MarkupLine($"Starting download of [u]{filename.Replace(@"Downloaded Firmware/","")}[/] ({task.MaxValue} bytes)");
 
             using (var contentStream = await response.Content.ReadAsStreamAsync())
             using (var fileStream = new FileStream(filename, FileMode.Create, FileAccess.Write, FileShare.None, 8192, true))
@@ -93,7 +93,7 @@ async Task Download(HttpClient client, ProgressTask task, string url)
                     var read = await contentStream.ReadAsync(buffer, 0, buffer.Length);
                     if (read == 0)
                     {
-                        AnsiConsole.MarkupLine($"Download of [u]{filename.Replace(@"Downloaded Firmware\", "")}[/] [green]completed![/]");
+                        AnsiConsole.MarkupLine($"Download of [u]{filename.Replace(@"Downloaded Firmware/", "")}[/] [green]completed![/]");
                         break;
                     }
 
