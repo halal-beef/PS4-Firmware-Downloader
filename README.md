@@ -15,3 +15,8 @@ Windows
 Linux
 
 MacOS (Theoretically, build it and find out my laptop isnt some sort of killer laptop i cant hackintosh it and i cannot afford a mac)
+
+# Known Bugs
+None afaik
+
+On Linux you may need to resize your window so that the full changelog isnt cut off
