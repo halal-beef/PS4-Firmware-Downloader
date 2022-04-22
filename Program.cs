@@ -1,21 +1,21 @@
-﻿using System.Threading;
-using System.Globalization;
 using HtmlAgilityPack;
 using Spectre.Console;
 
+// Grabbing Locale & Fake Init (lol)
 string locale = Thread.CurrentThread.CurrentCulture.Name.ToLower();
 AnsiConsole.Markup($"[green]Grabbing Firmware...\n\nDetected Locale: {locale}[/]");
 await Task.Delay(5000);
 AnsiConsole.Clear();
 
+// Variables
 var client = new HttpClient();
 HtmlWeb w = new HtmlWeb();
 var hd = w.Load($"https://www.playstation.com/{locale}/support/hardware/ps4/system-software/");
-string[] ReinstallLinkAndText = new string[3];
-string[] NormalLinkAndText = new string[3];
-var stuff = hd.DocumentNode.SelectSingleNode(@"/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/section[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]
-");
+string ReinstallLink = "dog fart";
+string NormalLink = "donkey fart";
+var stuff = hd.DocumentNode.SelectSingleNode(@"//div[@class='accordion__item-description']");
 string ChangeLogs = " " + stuff.InnerText.TrimEnd();
+var items = new (string name, string url)[1] { ("1","1") };
 var linksOnPage = from lnks in hd.DocumentNode.Descendants()
                   where lnks.Name == "a" &&
                        lnks.Attributes["href"] != null &&
@@ -26,31 +26,38 @@ var linksOnPage = from lnks in hd.DocumentNode.Descendants()
                       Text = lnks.InnerText
                   };
 
+// linksOnPage gets all the nodes in the DocumentNode and sees if it has a redirect & if it does it stores it in two strings Url & Text.
+// Text is just the text (e.g a if a button had the text "Google" and it redirected to google the Text variable would be Google).
+// The Url string stores the Url.
+// linksOnPage is an enumerable string
 
+// Main Functions
 
 foreach (var i in linksOnPage)
 {
 
-    if (i.Url.StartsWith("https://pc.ps4.update.playstation.net") && i.Url.Contains("rec_"))
+    switch(i.Url)
     {
-        ReinstallLinkAndText[0] = i.Url;
-        ReinstallLinkAndText[1] = i.Text.Trim();
-        AnsiConsole.Markup("[Green]Grabbed Reinstallation Firmware![/]\n");
-    }
-    else if (i.Url.StartsWith("https://pc.ps4.update.playstation.net") && i.Url.Contains("sys_")) 
-    {
-        NormalLinkAndText[0] = i.Url;
-        NormalLinkAndText[1] = i.Text.Trim();
-        AnsiConsole.Markup("[Green]Grabbed Normal Update Firmware![/]\n");
-
+        case string Rein when Rein.StartsWith("https://pc.ps4.update.playstation.net") && Rein.Contains("rec_"):
+            AnsiConsole.Markup("[Green]Grabbed Reinstallation Firmware![/]\n");
+            ReinstallLink = Rein;
+            break;
+        case String Update when Update.StartsWith("https://pc.ps4.update.playstation.net") && Update.Contains("sys_"):
+            NormalLink = i.Url;
+            AnsiConsole.Markup("[Green]Grabbed Normal Update Firmware![/]\n");
+            break;
     }
 }
+
+// Iterates through linksOnPage and grabs both firmware links.
 
 AnsiConsole.Markup("[Green]Proceeding To Download Page...[/]");
 
 await Task.Delay(5000);
 
 AnsiConsole.Clear();
+
+// Show Proceding To Download Page message and clear console after 5 seconds
 
 var Choice = AnsiConsole.Prompt(
     new SelectionPrompt<string>()
@@ -59,6 +66,9 @@ var Choice = AnsiConsole.Prompt(
         .AddChoices(new[] {
             "Full Firmware (Recovery)","Normal System Update"
         }));
+
+
+// Show Our Choices
 
 async Task Download(HttpClient client, ProgressTask task, string url)
 {
@@ -100,6 +110,7 @@ async Task Download(HttpClient client, ProgressTask task, string url)
     }
 }
 
+// Function to download (Uses Spectre Console Progress)
 
 switch (Choice)
 {
@@ -120,10 +131,7 @@ switch (Choice)
     })
     .StartAsync(async ctx =>
     {
-        var items = new (string name, string url)[]
-        {
-            ($"Full Recovery Firmware ({ChangeLogs.TrimStart().Split('\n').First()})",ReinstallLinkAndText[0])
-        };
+        items[0] = ($"Full Recovery Firmware ({ChangeLogs.TrimStart().Split('\n').First()})", ReinstallLink);
 
         await Task.WhenAll(items.Select(async item =>
         {
@@ -153,10 +161,7 @@ switch (Choice)
     })
     .StartAsync(async ctx =>
     {
-        var items = new (string name, string url)[]
-        {
-            ($"Normal Firmware ({ChangeLogs.TrimStart().Split('\n').First()})",NormalLinkAndText[0])
-        };
+        items[0] = ($"Normal Firmware ({ChangeLogs.TrimStart().Split('\n').First()})", NormalLink);
 
         await Task.WhenAll(items.Select(async item =>
         {
@@ -172,4 +177,8 @@ switch (Choice)
         break;
 }
 
+// See which choice user selected and download the firmware user wanted.
+
 Thread.Sleep(-1);
+
+// This will make console not auto close :D
