@@ -10,6 +10,10 @@ dotnet publish "/home/runner/work/PS4-Firmware-Downloader/PS4-Firmware-Downloade
 
 dotnet publish "/home/runner/work/PS4-Firmware-Downloader/PS4-Firmware-Downloader/PS4 Firmware Downloader.csproj" /p:DefineConstants=LINUX --output "build-debug/" --arch x64 --os linux -c debug --self-contained true # linux build
 
+dotnet publish "/home/runner/work/PS4-Firmware-Downloader/PS4-Firmware-Downloader/PS4 Firmware Downloader.csproj" /p:DefineConstants=LINUX --output "build/" --arch x64 --os macos -c release --self-contained true # MacOS build
+
+dotnet publish "/home/runner/work/PS4-Firmware-Downloader/PS4-Firmware-Downloader/PS4 Firmware Downloader.csproj" /p:DefineConstants=LINUX --output "build-debug/" --arch x64 --os macos -c debug --self-contained true # MacOS build
+
 # Move debug build
 mv "/home/runner/work/PS4-Firmware-Downloader/PS4-Firmware-Downloader/build-debug/PS4 Firmware Downloader.exe" "/home/runner/work/PS4-Firmware-Downloader/PS4-Firmware-Downloader/build/DEBUG-PS4 Firmware Downloader.exe"
 
