@@ -14,7 +14,7 @@ Windows
 
 Linux
 
-MacOS (Theoretically, build it and find out my laptop isnt some sort of killer laptop i cant hackintosh it and i cannot afford a mac)
+MacOS (Thank you to [rakanbakir](https://github.com/rakanbakir) for testing)
 
 # Known Bugs
 None afaik
